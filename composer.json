@@ -1,0 +1,25 @@
+{
+    "name": "detain/zip-zapper",
+    "type": "library",
+    "description": "Validates Zip/Postal Codes for any country and gives that countries name for thier verions of Zip/Post code",
+    "keywords": ["postcode","zip","zipcode","eircode","postal code","zip code","validator","cap","cep","npa","pin code","plz","postal expedition code","postal addressing codde","numéro postal d'acheminement","numéro postal d'acheminement","postal index number","Postal Routing Number","zone improvement plan"],
+    "homepage": "https://detain.github.io/zip-zapper",
+    "license": "LGPL-2.1",
+    "authors": [
+        { "name": "Joe Huss", "email": "detain@interserver.net" }
+    ],
+    "autoload": {
+        "psr-0": { "Detain\\ZipZapper": "src/" }
+    },
+    "require": {
+        "php": ">=5.3.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "5.1.*"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.1.x-dev"
+        }
+    }
+}

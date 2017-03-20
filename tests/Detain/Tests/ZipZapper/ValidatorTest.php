@@ -1,10 +1,4 @@
 <?php
-
-/*
- * This file is part of the postal-code-validator package
- *
- * @author Joe Huss <detain@interserver.net>
- */
  
 namespace Detain\Tests\PostalCodeValidator;
 

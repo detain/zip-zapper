@@ -21,13 +21,17 @@ $zip_names = [
 	'US' => ['name' => 'ZIP code', 'acronym_text' => 'Zone Improvement Plan'],
 ];
 
-require(__DIR__ . '/../include/functions.inc.php');
+require(__DIR__ . '/../../../include/functions.inc.php');
 function_requirements('getcurlpage');
-//$page = getcurlpage('https://en.wikipedia.org/wiki/Special:Export/List_of_postal_codes');
-$page = getcurlpage('https://en.wikipedia.org/wiki/List_of_postal_codes');
-function_requirements('xml2array');
-$data = xml2array($page, 1, 'attribute');
-print_r($data);
+$page = getcurlpage('https://en.wikipedia.org/wiki/Special:Export/List_of_postal_codes');
+$page = str_replace("\n\n", "\n", $page);
+preg_match_all("/^\|-\.*.^\| (?P<country>.*)$.^\| *(?P<since>.*)$.^\| *(?P<iso>.*)$.^\| *(?P<area>.*)$.^\| *(?P<street>.*)$.^\| (?P<notes>.*)$/msU", $page, $matches);
+print_r($matches);
+//$page = getcurlpage('https://en.wikipedia.org/wiki/List_of_postal_codes');
+//function_requirements('xml2array');
+//$data = xml2array($page, 1, 'attribute');
+//$data = xml2array($page, 1);
+//print_r($data);
 exit;
 
 /*

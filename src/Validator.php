@@ -5,7 +5,7 @@
  * @author Joe Huss <detain@interserver.net>
  */
 
-namespace Detain\ZipZapper;
+namespace Detain\Zip-Zapper;
 
 /**
  * Validator.

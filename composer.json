@@ -9,7 +9,7 @@
         { "name": "Joe Huss", "email": "detain@interserver.net" }
     ],
     "autoload": {
-        "psr-4": { "Detain\\ZipZapper\\": "src/" }
+        "psr-4": { "Detain\\Zip-Zapper\\": "src/" }
     },
     "require": {
         "php": ">=5.3.2"

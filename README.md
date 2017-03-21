@@ -6,7 +6,6 @@ Validates Zip / Postal type codes by country with some features
 [DMOZ Post/Zip Code Info+DB](http://dmoztools.net/Reference/Directories/Address_and_Phone_Numbers/Postal_Codes/)
 [List of Postal Codes](https://en.wikipedia.org/wiki/List_of_postal_codes)
 
-
 ## Usage
 
 ### Check If Country Is Supported
@@ -36,10 +35,3 @@ Validates Zip / Postal type codes by country with some features
 + `#` = `0-9`
 + `@` = `a-zA-Z`
 
-## Country Codes
-
-Postal-code-validator uses [ISO 3166](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) 2-letter country codes
-
-## License
-
-See LICENSE.

@@ -15,7 +15,7 @@ $zip_names = [
 	'IE' => ['name' => 'Eircode'],
 	'IT' => ['name' => 'CAP', 'acronym_text' => 'Codice di Avviamento Postale (Postal Expedition Code)'],
 	'BR' => ['name' => 'CEP', 'acronym_text' => 'Código de endereçamento postal (Postal Addressing Code)'],
-	'CH' => ['name' => 'NPA', 'acronym_text' => 'numéro postal d\'acheminement in French-speaking Switzerland and numéro postal d\'acheminement in Italian-speaking Switzerland'],
+	'CH' => ['name' => 'NPA', 'acronym_text' => "numéro postal d'acheminement in French-speaking Switzerland and numéro postal d'acheminement in Italian-speaking Switzerland"],
 	'IN' => ['name' => 'PIN code', 'acronym_text' => 'postal index number.'],
 	'DE' => ['name' => 'PLZ', 'acronym_text' => 'Postleitzahl (Postal Routing Number)'],
 	'US' => ['name' => 'ZIP code', 'acronym_text' => 'Zone Improvement Plan'],

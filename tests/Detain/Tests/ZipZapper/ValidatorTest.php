@@ -1,6 +1,6 @@
 <?php
  
-namespace Detain\Tests\PostalCodeValidator;
+namespace Detain\Tests\ZipZapper;
 
 use Detain\ZipZapper\Validator;
 
@@ -96,4 +96,11 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($validator->isValid('CZ', '60200'));
         $this->assertTrue($validator->isValid('CZ', '60200', true));
     }
+
+    public function testZipName()
+    {
+        $validator = new Validator();
+        $this->assertEquals($validator->getZipName('US'), 'ZIP code');
+    }
+
 }

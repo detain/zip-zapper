@@ -63,7 +63,7 @@ class Validator
 		'BN' => ['@@####'],		// Brunei
 		'BO' => [],			// Bolivia
 		'BQ' => [],			// Bonaire, Sint Eustatius and Saba
-		'BR' => ['#####', '#####-###', '#####-###'],		// Brazil, Notes: NNNNN only from 1971 to 1992. Código de Endereçamento Postal (CEP): -000 to -899 are used for streets, roads, avenues, boulevards; -900 to -959 are used for buildings with a high postal use; -960 to -969 are for promotional use; -970 to -989 are post offices and regular P.O. boxes; and -990 to -998 are used for community P.O. boxes. -999 is used for special services.
+		'BR' => ['#####-###'],		// Brazil, Notes: NNNNN only from 1971 to 1992. Código de Endereçamento Postal (CEP): -000 to -899 are used for streets, roads, avenues, boulevards; -900 to -959 are used for buildings with a high postal use; -960 to -969 are for promotional use; -970 to -989 are post offices and regular P.O. boxes; and -990 to -998 are used for community P.O. boxes. -999 is used for special services.
 		'BS' => [],			// Bahamas
 		'BT' => ['#####'],		// Bhutan
 		'BV' => [],			// Bouvet Island

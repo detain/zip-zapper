@@ -2,11 +2,11 @@
 
 Validates Zip / Postal type codes by country with some features 
 
-[Postal Systems by Country](https://en.wikipedia.org/wiki/Category:Postal_system)
-[DMOZ Post/Zip Code Info+DB](http://dmoztools.net/Reference/Directories/Address_and_Phone_Numbers/Postal_Codes/)
-[List of Postal Codes](https://en.wikipedia.org/wiki/List_of_postal_codes)
+[Postal Systems by Country](https://en.wikipedia.org/wiki/Category:Postal_system)<br>
+[DMOZ Post/Zip Code Info+DB](http://dmoztools.net/Reference/Directories/Address_and_Phone_Numbers/Postal_Codes/)<br>
+[List of Postal Codes](https://en.wikipedia.org/wiki/List_of_postal_codes)<br>
 
-Based on a similar project [sirprize/postal-code-validator](https://github.com/sirprize/postal-code-validator)
+Based on a similar project [sirprize/postal-code-validator](https://github.com/sirprize/postal-code-validator) but expanded on it adding over 100 new validations and updating ther others using mostly the Wikipedia postal codes list and some other features I needed in zip validation.
 
 ## Usage
 

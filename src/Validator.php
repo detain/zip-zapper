@@ -90,8 +90,6 @@ class Validator
 		'CY' => ['####'],		// Cyprus, Notes: The postal code system covers the whole island, but is not used on mail to [[Northern Cyprus]]. Northern Cyprus uses a 5-digit code commencing 99, introduced in 2013. For mail sent there from abroad, the line &quot;Mersin 10&quot; is written on the line above that containing the postal code, and the country name used is &quot;Turkey&quot;.
 		'CZ' => ['### ##'],		// Czech Republic, Notes: With Slovak Republic, Poštovní směrovací číslo (PSČ) - postal routing number.
 		'DE' => ['#####'],		// Germany, Notes: Known as Postleitzahl (PLZ), introduced after the [[German reunification]]. Between 1989 and 1993 the old separate 4-digit postal codes of former [[West-Germany|West-]] and [[East-Germany]] were distinguished by preceding &quot;W-&quot; ('West') or &quot;O-&quot; ({{lang|de|'Ost'}} for East).
-		'DE' => ['##'],		// Germany, Notes: Postleitzahl (PLZ)
-		'DE' => ['####'],		// Germany, Notes: Postleitzahl (PLZ)
 		'DJ' => [],			// Djibouti
 		'DK' => ['####'],		// Denmark, Notes: Numbering follows the dispatch of postal trains from Copenhagen.&lt;ref&gt;http://www.denstoredanske.dk/It,_teknik_og_naturvidenskab/Elektronik,_teletrafik_og_kommunikation/Postforsendelser/postnummer?highlight=postnummer&lt;/ref&gt; Also used by [[Greenland]], e.g.: [[Nuuk|DK-3900 Nuuk]].
 		'DM' => [],			// Dominica
@@ -218,14 +216,12 @@ class Validator
 		'PN' => ['PCR# 1ZZ'],		// Pitcairn Islands, Notes: Single code used(AAAA NAA). UK territory, but not UK postcode
 		'PR' => ['#####', '#####-####'],		// Puerto Rico, Notes: U.S. ZIP codes. ZIP codes 006XX for NW PR, 007XX for SE PR, in which XX designates the town or post office and 009XX for the San Juan Metropolitan Area, in which XX designates the area or borough of San Juan. The last four digits identify an area within the post office. For example 00716-2604: 00716-for the east section of the city of Ponce and 2604 for Aceitillo St. in the neighborhood of Los Caobos. US Post office is changing the PR address format to the American one: 1234 No Name Avenue, San Juan, PR 00901.
 		'PS' => ['###'],		// Palestine, Notes: not yet implemented in practice. Codes '''100-899''' are in the Westbank, '''900-999''' in the Gaza Strip
-		'PT' => ['####-###'],		// Portugal
-		'PT' => ['####'],		// Portugal
+		'PT' => ['####-###', '####'],	// Portugal
 		'PW' => ['#####', '#####-####'],		// Palau, Notes: U.S. ZIP codes. All locations '''96940'''.
 		'PY' => ['####'],		// | [[List of postal codes of Paraguay|Paraguay]]
 		'QA' => [],			// Qatar
 		'RE' => ['974##'],		// Réunion, Notes: Overseas Department of France. French codes used. Range '''97400''' - '''97490'''.
 		'RO' => ['######'],		// Romania, Notes: Previously '''99999''' in [[Bucharest]] and '''9999''' in rest of country.
-		'RS' => ['#####'],		// Serbia
 		'RS' => ['#####'],		// Serbia, Notes: Poštanski adresni kod (PAK)
 		'RU' => ['######'],		// Russia, Notes: Placed on a line of its own.
 		'RW' => [],			// Rwanda
@@ -234,8 +230,6 @@ class Validator
 		'SC' => [],			// Seychelles
 		'SD' => ['#####'],		// Sudan
 		'SE' => ['### ##'],		// Sweden, Notes: The lowest number is '''100 00''' and the highest number is '''984 99'''.
-		'SG' => ['##'],		// Singapore
-		'SG' => ['####'],		// Singapore
 		'SG' => ['######'],		// Singapore, Notes: Each building has its own unique postcode.
 		'SH' => ['@@@@ 1ZZ'],		// Saint Helena, Ascension and Tristan da Cunha, Notes: Part of UK system (AAAA NAA). [[Saint Helena, Ascension and Tristan da Cunha|Saint Helena]] uses one code STHL 1ZZ, [[Ascension Island|Ascension]] uses one code ASCN 1ZZ, [[Tristan da Cunha]] uses one code TDCU 1ZZ.
 		'SI' => ['####', 'CC-####'],		// Slovenia

@@ -6,6 +6,8 @@ Validates Zip / Postal type codes by country with some features
 [DMOZ Post/Zip Code Info+DB](http://dmoztools.net/Reference/Directories/Address_and_Phone_Numbers/Postal_Codes/)
 [List of Postal Codes](https://en.wikipedia.org/wiki/List_of_postal_codes)
 
+Based on a similar project [sirprize/postal-code-validator](https://github.com/sirprize/postal-code-validator)
+
 ## Usage
 
 ### Check If Country Is Supported

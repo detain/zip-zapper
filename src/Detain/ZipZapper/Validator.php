@@ -342,4 +342,12 @@ class Validator
 
 		return '/^' . $pattern . '$/';
 	}
+
+	public function getZipName($countryCode) {
+		if (isset($this->zip_names[$countryCode]))
+			$name = $this->zip_names[$countryCode]['name'];
+		else
+			$name = 'Postal Code';
+		return $name;
+	}
 }

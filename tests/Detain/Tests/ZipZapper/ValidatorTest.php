@@ -2,7 +2,7 @@
  
 namespace Detain\Tests\ZipZapper;
 
-use Detain\ZipZapper\Validator;
+use \Detain\ZipZapper\Validator;
 
 class ValidatorTest extends \PHPUnit_Framework_TestCase
 {

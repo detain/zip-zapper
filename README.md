@@ -10,14 +10,14 @@ Validates Zip / Postal type codes by country with some features
 
 ### Check If Country Is Supported
 
-    use Detain\Zip-Zapper\Validator;
+    use Detain\ZipZapper\Validator;
     
     $validator = new Validator();
     $validator->hasCountry('CH'); // returns true
 
 ### Check If Postal Code Is Properly Formatted
 
-    use Detain\Zip-Zapper\Validator;
+    use Detain\ZipZapper\Validator;
     
     $validator = new Validator();
     $validator->isValid('CH', 'usjU87jsdf'); // returns false
@@ -25,7 +25,7 @@ Validates Zip / Postal type codes by country with some features
 
 ### Get The Possible Formats For a Specific Country
 
-    use Detain\Zip-Zapper\Validator;
+    use Detain\ZipZapper\Validator;
     
     $validator = new Validator();
     $validator->getFormats('GB'); // returns array('@@## #@@', '@#@ #@@', '@@# #@@', '@@#@ #@@', '@## #@@', '@# #@@')

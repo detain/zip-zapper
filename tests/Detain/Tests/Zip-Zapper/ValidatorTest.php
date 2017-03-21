@@ -2,13 +2,13 @@
  
 namespace Detain\Tests\PostalCodeValidator;
 
-use Detain\Zip-Zapper\Validator;
+use Detain\ZipZapper\Validator;
 
 class ValidatorTest extends \PHPUnit_Framework_TestCase
 {
     
     /**
-     * @expectedException Detain\Zip-Zapper\ValidationException
+     * @expectedException Detain\ZipZapper\ValidationException
      */
     public function testInvalidCountryCode()
     {

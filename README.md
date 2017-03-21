@@ -2,6 +2,8 @@
 
 Validates Zip / Postal type codes by country with some features 
 
+[![Build Status](https://secure.travis-ci.org/detain/zip-zapper.png?branch=master)](http://travis-ci.org/detain/zip-zapper)
+
 [Postal Systems by Country](https://en.wikipedia.org/wiki/Category:Postal_system)<br>
 [DMOZ Post/Zip Code Info+DB](http://dmoztools.net/Reference/Directories/Address_and_Phone_Numbers/Postal_Codes/)<br>
 [List of Postal Codes](https://en.wikipedia.org/wiki/List_of_postal_codes)<br>

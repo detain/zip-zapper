@@ -4,7 +4,7 @@
     "description": "Validates Zip/Postal Codes for any country and gives that countries name for thier verions of Zip/Post code",
     "keywords": ["postcode","zip","zipcode","eircode","postal code","zip code","validator","cap","cep","npa","pin code","plz","postal expedition code","postal addressing codde","numro postal dacheminement","numro postal dacheminement","postal index number","Postal Routing Number","zone improvement plan"],
     "homepage": "https://detain.github.io/zip-zapper",
-    "license": "LGPL-2.1",
+    "license": "MIT",
     "authors": [
         { "name": "Joe Huss", "email": "detain@interserver.net" }
     ],

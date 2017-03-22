@@ -10,6 +10,10 @@ Validates Zip / Postal type codes by country with some features
 
 Based on a similar project [sirprize/postal-code-validator](https://github.com/sirprize/postal-code-validator) but expanded on it adding over 100 new validations and updating ther others using mostly the Wikipedia postal codes list and some other features I needed in zip validation.
 
+## Installation
+
+    composer require detain/zip-zapper
+
 ## Usage
 
 ### Check If Country Is Supported

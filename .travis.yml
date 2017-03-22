@@ -8,3 +8,5 @@ php:
   - hhvm
   - nightly
 install: composer update --dev
+script: vendor/phpunit/phpunit/phpunit
+

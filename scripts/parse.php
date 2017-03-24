@@ -29,18 +29,18 @@ $lines = explode("\n", $page);
 $found = [];
 for($x = 0; $x < sizeof($lines); $x++) {
 	$line = $lines[$x];
-	if ((trim($line) == '|-' || trim($line) == '|-.') && substr($lines[$x + 1], 0, 1) != '!') {
+	if ((trim($line) == '|-' || trim($line) == '|-.') && mb_substr($lines[$x + 1], 0, 1) != '!') {
 		$x++;
 		$country = preg_replace('/\| *\[\[Postal codes in [^\|]*\|(.*)\]\]/msU', '\1', $lines[$x]);
 		$x++;
 		$x++;
 		$iso = preg_replace('/\| *\[\[ISO 3166-[0-9]*:[A-Z]*\|(.*)\]\]/msU', '\1', $lines[$x]);
 		$x++;
-		$area = trim(substr($lines[$x], 1));
+		$area = trim(mb_substr($lines[$x], 1));
 		$x++;
-		$street = trim(substr($lines[$x], 1));
+		$street = trim(mb_substr($lines[$x], 1));
 		$x++;
-		$notes = trim(substr($lines[$x], 1));
+		$notes = trim(mb_substr($lines[$x], 1));
 		$codes = [];
 		$area = explode(',', $area);
 		foreach ($area as $each_area)

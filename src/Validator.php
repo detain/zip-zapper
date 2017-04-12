@@ -287,6 +287,7 @@ class Validator
 
 	public function isValid($countryCode, $postalCode, $ignoreSpaces = false)
 	{
+		$postalCode = str_replace('-', '', $postalCode);
 		if(!isset($this->formats[$countryCode]))
 		{
 			throw new ValidationException(sprintf('Invalid country code: "%s"', $countryCode));
@@ -326,6 +327,7 @@ class Validator
 
 	protected function getFormatPattern($format, $ignoreSpaces = false)
 	{
+		$format = str_replace('-', '', $format);
 		$pattern = str_replace('#', '\d', $format);
 		$pattern = str_replace('@', '[a-zA-Z]', $pattern);
 

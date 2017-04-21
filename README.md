@@ -2,7 +2,19 @@
 
 Validates Zip / Postal type codes by country with some features 
 
+[![Latest Stable Version](https://poser.pugx.org/detain/zip-zapper/version)](https://packagist.org/packages/detain/zip-zapper)
+[![Total Downloads](https://poser.pugx.org/detain/zip-zapper/downloads)](https://packagist.org/packages/detain/zip-zapper)
+[![Latest Unstable Version](https://poser.pugx.org/detain/zip-zapper/v/unstable)](//packagist.org/packages/detain/zip-zapper)
+[![License](https://poser.pugx.org/detain/zip-zapper/license)](https://packagist.org/packages/detain/zip-zapper)
+[![Monthly Downloads](https://poser.pugx.org/detain/zip-zapper/d/monthly)](https://packagist.org/packages/detain/zip-zapper)
+[![Daily Downloads](https://poser.pugx.org/detain/zip-zapper/d/daily)](https://packagist.org/packages/detain/zip-zapper)
+[![Reference Status](https://www.versioneye.com/php/detain:zip-zapper/reference_badge.svg?style=flat)](https://www.versioneye.com/php/detain:zip-zapper/references) 
 [![Build Status](https://travis-ci.org/detain/zip-zapper.svg?branch=master)](https://travis-ci.org/detain/zip-zapper)
+[![Code Climate](https://codeclimate.com/github/detain/zip-zapper/badges/gpa.svg)](https://codeclimate.com/github/detain/zip-zapper) 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/detain/zip-zapper/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/detain/zip-zapper/?branch=master) 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/659523f63e16487ea71f6b763908d09e)](https://www.codacy.com/app/detain/zip-zapper)
+
+
 
 [Postal Systems by Country](https://en.wikipedia.org/wiki/Category:Postal_system)<br>
 [DMOZ Post/Zip Code Info+DB](http://dmoztools.net/Reference/Directories/Address_and_Phone_Numbers/Postal_Codes/)<br>

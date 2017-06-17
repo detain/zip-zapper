@@ -14,6 +14,5 @@ namespace Detain\ZipZapper;
  * @author Joe Huss <detain@interserver.net>
  */
  
-class ValidationException extends \Exception
-{
+class ValidationException extends \Exception {
 }

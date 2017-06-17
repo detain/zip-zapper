@@ -15,4 +15,5 @@ namespace Detain\ZipZapper;
  */
  
 class ValidationException extends \Exception
-{}
+{
+}

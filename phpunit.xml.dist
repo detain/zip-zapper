@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <phpunit backupGlobals="false"
          backupStaticAttributes="false"
          colors="true"
@@ -11,6 +10,14 @@
          syntaxCheck="false"
          bootstrap="./tests/bootstrap.php"
 >
+  <logging>
+    <log type="coverage-clover" target="build/logs/clover.xml"/>
+  </logging>
+  <filter>
+    <whitelist processUncoveredFilesFromWhitelist="true" addUncoveredFilesFromWhitelist="true">
+      <directory suffix=".php">/src</directory>
+    </whitelist>
+  </filter>
     <testsuites>
         <testsuite name="ZipZapper Test Suite">
             <directory>./tests</directory>

@@ -12,8 +12,7 @@ namespace Detain\ZipZapper;
  *
  * @author Joe Huss <detain@interserver.net>
  */
-class Validator
-{
+class Validator {
 	protected $zip_names = array(
 		'BR' => array('name' => 'CEP', 'acronym_text' => 'Código de endereçamento postal (Postal Addressing Code)'),
 		'CA' => array('name' => 'Postal Code', 'acronym_text' => ''),
@@ -285,58 +284,48 @@ class Validator
 		'ZW' => array(), // Zimbabwe, Notes: System is being planned.
 	);
 
-	public function isValid($countryCode, $postalCode, $ignoreSpaces = false)
-	{
+	public function isValid($countryCode, $postalCode, $ignoreSpaces = false) {
 		//$postalCode = str_replace('-', '', $postalCode);
-		if (!isset($this->formats[$countryCode]))
-		{
+		if (!isset($this->formats[$countryCode])) {
 			throw new ValidationException(sprintf('Invalid country code: "%s"', $countryCode));
 		}
 
-		foreach ($this->formats[$countryCode] as $format)
-		{
+		foreach ($this->formats[$countryCode] as $format) {
 			#echo $postalCode . ' - ' . $this->getFormatPattern($format)."\n";
-			if (preg_match($this->getFormatPattern($format, $ignoreSpaces), $postalCode))
-			{
+			if (preg_match($this->getFormatPattern($format, $ignoreSpaces), $postalCode)) {
 				return true;
 			}
 		}
 
-		if (!count($this->formats[$countryCode]))
-		{
+		if (!count($this->formats[$countryCode])) {
 			return true;
 		}
 
 		return false;
 	}
 
-	public function getFormats($countryCode)
-	{
-		if (!isset($this->formats[$countryCode]))
-		{
+	public function getFormats($countryCode) {
+		if (!isset($this->formats[$countryCode])) {
 			throw new ValidationException(sprintf('Invalid country code: "%s"', $countryCode));
 		}
 
 		return $this->formats[$countryCode];
 	}
 
-	public function hasCountry($countryCode)
-	{
+	public function hasCountry($countryCode) {
 		return (isset($this->formats[$countryCode]));
 	}
 
-	protected function getFormatPattern($format, $ignoreSpaces = false)
-	{
+	protected function getFormatPattern($format, $ignoreSpaces = false) {
 		//$format = str_replace('-', '', $format);
 		$pattern = str_replace('#', '\d', $format);
 		$pattern = str_replace('@', '[a-zA-Z]', $pattern);
 
-		if ($ignoreSpaces)
-		{
+		if ($ignoreSpaces) {
 			$pattern = str_replace(' ', ' ?', $pattern);
 		}
 
-		return '/^' . $pattern . '$/';
+		return '/^'.$pattern.'$/';
 	}
 
 	public function getZipName($countryCode) {

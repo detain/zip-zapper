@@ -6,19 +6,3 @@ checks:
         return_doc_comments: true
         uppercase_constants: true
 
-coding_style:
-    php:
-        indentation:
-            general:
-                use_tabs: true
-        spaces:
-            around_operators:
-                concatenation: true
-build:
-    tests:
-        override:
-            -
-                command: 'vendor/bin/phpunit --coverage-clover=clover-file'
-                coverage:
-                    file: 'clover-file'
-                    format: 'clover'

@@ -21,6 +21,14 @@ $zip_names = [
 	'US' => ['name' => 'ZIP code', 'acronym_text' => 'Zone Improvement Plan'],
 ];
 
+function get_codes_from($what, $codes) {
+	$what = explode(',', $what);
+	foreach ($what as $each_area)
+		if (trim($each_area) != '' && trim($each_area) != '- no codes -')
+			$codes[] = "'".trim($each_area)."'";
+	return $codes;
+}
+
 require(__DIR__.'/../../../include/functions.inc.php');
 function_requirements('getcurlpage');
 $page = getcurlpage('https://en.wikipedia.org/wiki/Special:Export/List_of_postal_codes');
@@ -41,15 +49,8 @@ for ($x = 0; $x < sizeof($lines); $x++) {
 		$street = trim(mb_substr($lines[$x], 1));
 		$x++;
 		$notes = trim(mb_substr($lines[$x], 1));
-		$codes = [];
-		$area = explode(',', $area);
-		foreach ($area as $each_area)
-			if (trim($each_area) != '' && trim($each_area) != '- no codes -')
-				$codes[] = "'".trim($each_area)."'";
-		$street = explode(',', $street);
-		foreach ($street as $each_street)
-			if (trim($each_street) != '')
-				$codes[] = "'".trim($each_street)."'";
+		$codes = get_codes_from($area, []);
+		$codes = get_codes_from($street, []);
 		$found[] = $iso;
 		echo "		'$iso' => [".str_replace(['N', 'A'], ['#', '@'], implode(", ", $codes))."],".(sizeof($codes) == 0 ? '	' : '')."		// $country".(trim($notes) != '' ? ', Notes: '.$notes : '')."\n";
 	}
@@ -71,15 +72,8 @@ foreach ($matches['country'] as $idx => $country) {
 	$area = $matches['area'][$idx];
 	$street = $matches['street'][$idx];
 	$notes = $matches['notes'][$idx];
-	$codes = [];
-	$area = explode(',', $area);
-	foreach ($area as $each_area)
-		if (trim($each_area) != '' && trim($each_area) != '- no codes -')
-			$codes[] = "'".trim($each_area)."'";
-	$street = explode(',', $street);
-	foreach ($street as $each_street)
-		if (trim($each_street) != '')
-			$codes[] = "'".trim($each_street)."'";
+	$codes = get_codes_from($area, []);
+	$codes = get_codes_from($street, $codes);
 	echo "		'$iso' => [".implode(", ", $codes)."]	// $country".(trim($notes) != '' ? ', Notes: '.$notes : '')."\n";
 }
 //$page = getcurlpage('https://en.wikipedia.org/wiki/List_of_postal_codes');

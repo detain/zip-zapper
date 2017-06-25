@@ -291,7 +291,7 @@ class Validator {
 		}
 
 		foreach ($this->formats[$countryCode] as $format) {
-			#echo $postalCode . ' - '.$this->getFormatPattern($format)."\n";
+			#echo $postalCode.' - '.$this->getFormatPattern($format)."\n";
 			if (preg_match($this->getFormatPattern($format, $ignoreSpaces), $postalCode)) {
 				return TRUE;
 			}

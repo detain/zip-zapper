@@ -22,7 +22,7 @@ class Validator {
 		'IN' => ['name' => 'PIN code', 'acronym_text' => 'postal index number.'],
 		'IT' => ['name' => 'CAP', 'acronym_text' => 'Codice di Avviamento Postale (Postal Expedition Code)'],
 		'NL' => ['name' => 'Postcode', 'acronym_text' => ''],
-		'US' => ['name' => 'ZIP code', 'acronym_text' => 'Zone Improvement Plan'],
+		'US' => ['name' => 'ZIP code', 'acronym_text' => 'Zone Improvement Plan']
 	];
 
 	/*

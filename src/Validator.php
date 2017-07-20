@@ -284,6 +284,13 @@ class Validator {
 		'ZW' => array(), // Zimbabwe, Notes: System is being planned.
 	);
 
+	/**
+	 * @param      $countryCode
+	 * @param      $postalCode
+	 * @param bool $ignoreSpaces
+	 * @return bool
+	 * @throws \Detain\ZipZapper\ValidationException
+	 */
 	public function isValid($countryCode, $postalCode, $ignoreSpaces = FALSE) {
 		//$postalCode = str_replace('-', '', $postalCode);
 		if (!isset($this->formats[$countryCode])) {
@@ -304,6 +311,11 @@ class Validator {
 		return FALSE;
 	}
 
+	/**
+	 * @param $countryCode
+	 * @return mixed
+	 * @throws \Detain\ZipZapper\ValidationException
+	 */
 	public function getFormats($countryCode) {
 		if (!isset($this->formats[$countryCode])) {
 			throw new ValidationException(sprintf('Invalid country code: "%s"', $countryCode));
@@ -312,10 +324,19 @@ class Validator {
 		return $this->formats[$countryCode];
 	}
 
+	/**
+	 * @param $countryCode
+	 * @return bool
+	 */
 	public function hasCountry($countryCode) {
 		return (isset($this->formats[$countryCode]));
 	}
 
+	/**
+	 * @param      $format
+	 * @param bool $ignoreSpaces
+	 * @return string
+	 */
 	protected function getFormatPattern($format, $ignoreSpaces = FALSE) {
 		//$format = str_replace('-', '', $format);
 		$pattern = str_replace('#', '\d', $format);
@@ -328,6 +349,10 @@ class Validator {
 		return '/^'.$pattern.'$/';
 	}
 
+	/**
+	 * @param $countryCode
+	 * @return string
+	 */
 	public function getZipName($countryCode) {
 		if (isset($this->zip_names[$countryCode]))
 			$name = $this->zip_names[$countryCode]['name'];

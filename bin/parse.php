@@ -1,13 +1,13 @@
 <?php
 /**
- *
- * @link https://en.wikipedia.org/wiki/Category:Postal_system Postal Systems by Country
- * @link http://dmoztools.net/Reference/Directories/Address_and_Phone_Numbers/Postal_Codes/ DMOZ Post/Zip Code Info+DB
- * @link https://en.wikipedia.org/wiki/List_of_postal_codes List of Postal Codes
- *
- * @var mixed
+ * @link     https://en.wikipedia.org/wiki/Category:Postal_system Postal Systems by Country
+ * @link     http://dmoztools.net/Reference/Directories/Address_and_Phone_Numbers/Postal_Codes/ DMOZ Post/Zip Code Info+DB
+ * @link     https://en.wikipedia.org/wiki/List_of_postal_codes List of Postal Codes
+ * @param $what
+ * @param $codes
+ * @return array
+ * @internal param mixed $
  */
-
 function get_codes_from($what, $codes) {
 	$what = explode(',', $what);
 	foreach ($what as $each_area)

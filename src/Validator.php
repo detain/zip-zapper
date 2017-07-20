@@ -329,7 +329,7 @@ class Validator {
 	 * @return bool
 	 */
 	public function hasCountry($countryCode) {
-		return (isset($this->formats[$countryCode]));
+		return isset($this->formats[$countryCode]);
 	}
 
 	/**

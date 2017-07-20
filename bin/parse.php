@@ -16,7 +16,7 @@ function get_codes_from($what, $codes) {
 	return $codes;
 }
 
-require(__DIR__.'/../../../include/functions.inc.php');
+require __DIR__.'/../../../include/functions.inc.php';
 function_requirements('getcurlpage');
 $page = getcurlpage('https://en.wikipedia.org/wiki/Special:Export/List_of_postal_codes');
 $page = str_replace("\n\n", "\n", $page);

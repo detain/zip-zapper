@@ -13,7 +13,7 @@ namespace Detain\ZipZapper;
  * @author Joe Huss <detain@interserver.net>
  */
 class Validator {
-	protected static $zip_names = [
+	protected static $zipNames = [
 		'BR' => ['name' => 'CEP', 'acronym_text' => 'Código de endereçamento postal (Postal Addressing Code)'],
 		'CA' => ['name' => 'Postal Code', 'acronym_text' => ''],
 		'CH' => ['name' => 'NPA', 'acronym_text' => "numéro postal d'acheminement in French-speaking Switzerland and numéro postal d'acheminement in Italian-speaking Switzerland"],
@@ -354,8 +354,8 @@ class Validator {
 	 * @return string
 	 */
 	public function getZipName($countryCode) {
-		if (isset($this->zip_names[$countryCode]))
-			$name = $this->zip_names[$countryCode]['name'];
+		if (isset($this->zipNames[$countryCode]))
+			$name = $this->zipNames[$countryCode]['name'];
 		else
 			$name = 'Postal Code';
 		return $name;

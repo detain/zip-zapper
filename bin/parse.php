@@ -10,9 +10,9 @@
  */
 function get_codes_from($what, $codes) {
 	$what = explode(',', $what);
-	foreach ($what as $each_area)
-		if (trim($each_area) != '' && trim($each_area) != '- no codes -')
-			$codes[] = "'".trim($each_area)."'";
+	foreach ($what as $eachArea)
+		if (trim($eachArea) != '' && trim($eachArea) != '- no codes -')
+			$codes[] = "'".trim($eachArea)."'";
 	return $codes;
 }
 

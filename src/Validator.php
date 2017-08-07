@@ -354,8 +354,8 @@ class Validator {
 	 * @return string
 	 */
 	public function getZipName($countryCode) {
-		if (isset($this->zip_names[$countryCode]))
-			$name = $this->zip_names[$countryCode]['name'];
+		if (isset($this->zipNames[$countryCode]))
+			$name = $this->zipNames[$countryCode]['name'];
 		else
 			$name = 'Postal Code';
 		return $name;

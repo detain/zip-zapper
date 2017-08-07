@@ -10,9 +10,9 @@
  */
 function get_codes_from($what, $codes) {
 	$what = explode(',', $what);
-	foreach ($what as $each_area)
-		if (trim($each_area) != '' && trim($each_area) != '- no codes -')
-			$codes[] = "'".trim($each_area)."'";
+	foreach ($what as $eachArea)
+		if (trim($eachArea) != '' && trim($eachArea) != '- no codes -')
+			$codes[] = "'".trim($eachArea)."'";
 	return $codes;
 }
 
@@ -39,7 +39,7 @@ for ($x = 0, $xMax = sizeof($lines); $x < $xMax; $x++) {
 		$codes = get_codes_from($area, []);
 		$codes = get_codes_from($street, []);
 		$found[] = $iso;
-		echo "		'$iso' => [".str_replace(['N', 'A'], ['#', '@'], implode(', ', $codes)). '],' .(count($codes) == 0 ? '	' : '')."		// $country".(trim($notes) != '' ? ', Notes: '.$notes : '').PHP_EOL;
+		echo "		'$iso' => [".str_replace(['N', 'A'], ['#', '@'], implode(', ', $codes)).'],'.(count($codes) == 0 ? '	' : '')."		// $country".(trim($notes) != '' ? ', Notes: '.$notes : '').PHP_EOL;
 	}
 }
 $db = $GLOBALS['tf']->db;

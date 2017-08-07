@@ -13,7 +13,7 @@ namespace Detain\ZipZapper;
  * @author Joe Huss <detain@interserver.net>
  */
 class Validator {
-	protected $zip_names = [
+	protected static $zip_names = [
 		'BR' => ['name' => 'CEP', 'acronym_text' => 'Código de endereçamento postal (Postal Addressing Code)'],
 		'CA' => ['name' => 'Postal Code', 'acronym_text' => ''],
 		'CH' => ['name' => 'NPA', 'acronym_text' => "numéro postal d'acheminement in French-speaking Switzerland and numéro postal d'acheminement in Italian-speaking Switzerland"],
@@ -31,7 +31,7 @@ class Validator {
 	 *     # - numberic 0-9
 	 *     @ - alpha a-zA-Z
 	 */
-	protected $formats = [
+	protected static $formats = [
 		'AD' => ['CC###'], // Andorra, Notes: Each Parishes of Andorra|parish now has its own post code.
 		'AE' => [], // United Arab Emirates
 		'AF' => ['####'], // Afghanistan, Notes: The first two digits (ranging from 10–43) correspond to the province, while the last two digits correspond either to the city/delivery zone (range 01–50) or to the district/delivery zone (range 51–99). (http://postalcode.afghanpost.gov.af/ Afghanistan Postal code lookup)

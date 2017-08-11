@@ -33,7 +33,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Detain\\ZipZapper\\": "src\/"
+            "Detain\\ZipZapper\\": "src/"
         }
     },
     "require": {

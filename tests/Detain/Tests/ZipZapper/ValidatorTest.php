@@ -105,7 +105,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
     public function testZipName()
     {
         $validator = new Validator();
-        $this->assertEquals($validator->getZipName('US'), 'ZIP code');
+        $this->assertEquals($validator->getZipName('US'), 'Postal code');
     }
 
 }

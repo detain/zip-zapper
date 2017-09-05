@@ -293,20 +293,17 @@ class Validator {
 	 */
 	public function isValid($countryCode, $postalCode, $ignoreSpaces = FALSE) {
 		//$postalCode = str_replace('-', '', $postalCode);
-		if (!isset($this->formats[$countryCode])) {
+		if (!isset($this->formats[$countryCode]))
 			throw new ValidationException(sprintf('Invalid country code: "%s"', $countryCode));
-		}
 
 		foreach ($this->formats[$countryCode] as $format) {
 			#echo $postalCode.' - '.$this->getFormatPattern($format).PHP_EOL;
-			if (preg_match($this->getFormatPattern($format, $ignoreSpaces), $postalCode)) {
+			if (preg_match($this->getFormatPattern($format, $ignoreSpaces), $postalCode))
 				return TRUE;
-			}
 		}
 
-		if (!count($this->formats[$countryCode])) {
+		if (!count($this->formats[$countryCode]))
 			return TRUE;
-		}
 
 		return FALSE;
 	}
@@ -317,9 +314,8 @@ class Validator {
 	 * @throws \Detain\ZipZapper\ValidationException
 	 */
 	public function getFormats($countryCode) {
-		if (!isset($this->formats[$countryCode])) {
+		if (!isset($this->formats[$countryCode]))
 			throw new ValidationException(sprintf('Invalid country code: "%s"', $countryCode));
-		}
 
 		return $this->formats[$countryCode];
 	}
@@ -342,9 +338,8 @@ class Validator {
 		$pattern = str_replace('#', '\d', $format);
 		$pattern = str_replace('@', '[a-zA-Z]', $pattern);
 
-		if ($ignoreSpaces) {
+		if ($ignoreSpaces)
 			$pattern = str_replace(' ', ' ?', $pattern);
-		}
 
 		return '/^'.$pattern.'$/';
 	}

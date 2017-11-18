@@ -60,7 +60,7 @@ class Validator {
 		'BL' => ['97133'], // Saint Barthélemy, Notes: Overseas Collectivity of France. French codes used.
 		'BM' => ['@@ ##', '@@ @@'], // Bermuda, Notes: AA NN for street addresses, AA AA for P.O. Box addresses. The second half of the postcode identifies the street delivery walk (e.g.: Hamilton HM 12) or the PO Box number range (e.g.: Hamilton HM BX).  See Postal codes in Bermuda.
 		'BN' => ['@@####'], // Brunei
-		'BO' => [], // Bolivia
+		'BO' => ['####'], // Bolivia
 		'BQ' => [], // Bonaire, Sint Eustatius and Saba
 		'BR' => ['#####-###'], // Brazil, Notes: NNNNN only from 1971 to 1992. Código de Endereçamento Postal (CEP): -000 to -899 are used for streets, roads, avenues, boulevards; -900 to -959 are used for buildings with a high postal use; -960 to -969 are for promotional use; -970 to -989 are post offices and regular P.O. boxes; and -990 to -998 are used for community P.O. boxes. -999 is used for special services.
 		'BS' => [], // Bahamas

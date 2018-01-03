@@ -39,7 +39,7 @@ for ($x = 0, $xMax = sizeof($lines); $x < $xMax; $x++) {
 		$codes = get_codes_from($area, []);
 		$codes = get_codes_from($street, []);
 		$found[] = $iso;
-		echo "		'$iso' => [".str_replace(['N', 'A'], ['#', '@'], implode(', ', $codes)).'],'.(count($codes) == 0 ? '	' : '')."		// $country".(trim($notes) != '' ? ', Notes: '.$notes : '').PHP_EOL;
+		echo "		'{$iso}' => [".str_replace(['N', 'A'], ['#', '@'], implode(', ', $codes)).'],'.(count($codes) == 0 ? '	' : '')."		// $country".(trim($notes) != '' ? ', Notes: '.$notes : '').PHP_EOL;
 	}
 }
 $db = $GLOBALS['tf']->db;
@@ -61,7 +61,7 @@ foreach ($matches['country'] as $idx => $country) {
 	$notes = $matches['notes'][$idx];
 	$codes = get_codes_from($area, []);
 	$codes = get_codes_from($street, $codes);
-	echo "		'$iso' => [".implode(', ', $codes)."]	// $country".(trim($notes) != '' ? ', Notes: '.$notes : '').PHP_EOL;
+	echo "		'{$iso}' => [".implode(', ', $codes)."]	// $country".(trim($notes) != '' ? ', Notes: '.$notes : '').PHP_EOL;
 }
 //$page = getcurlpage('https://en.wikipedia.org/wiki/List_of_postal_codes');
 //function_requirements('xml2array');

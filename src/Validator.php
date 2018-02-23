@@ -164,7 +164,7 @@ class Validator {
 		'LK' => ['#####'], // Sri Lanka, Notes: Reference: http://mohanjith.net/ZIPLook/ Incorporates Colombo postal districts, e.g.: Colombo 1 is &quot;00100&quot;. You can search for specific postal codes [http://www.slpost.gov.lk here].
 		'LR' => ['####'], // Liberia, Notes: Two digit postal zone after city name.
 		'LS' => ['###'], // Lesotho
-		'LT' => ['CC-#####'], // Lithuania, Notes: References: http://www.post.lt/en/help/postal-code-search. Previously '''9999''' which was actually the old Soviet Union|Soviet '''999999''' format code with the first 2 digits dropped.
+		'LT' => ['LT-#####'], // Lithuania, Notes: References: http://www.post.lt/en/help/postal-code-search. Previously '''9999''' which was actually the old Soviet Union|Soviet '''999999''' format code with the first 2 digits dropped.
 		'LU' => ['####'], // Luxembourg, Notes: References: http://www.upu.int/post_code/en/countries/LUX.pdf
 		'LV' => ['CC-####'], // Latvia
 		'LY' => [], // Libya

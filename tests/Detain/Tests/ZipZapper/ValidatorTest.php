@@ -2,14 +2,15 @@
 
 namespace Detain\Tests\ZipZapper;
 
-use \Detain\ZipZapper\Validator;
+use Detain\ZipZapper\Validator;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class ValidatorTest
  *
  * @package Detain\Tests\ZipZapper
  */
-class ValidatorTest extends \PHPUnit_Framework_TestCase
+class ValidatorTest extends TestCase
 {
 
     /**
@@ -105,7 +106,30 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
     public function testZipName()
     {
         $validator = new Validator();
-        $this->assertEquals($validator->getZipName('US'), 'Postal Code');
+        $this->assertEquals('ZIP code', $validator->getZipName('US'));
+        $this->assertEquals('Postal Code', $validator->getZipName('invalid_country_code'));
+    }
+
+    public function testGetFormats()
+    {
+        $validator = new Validator();
+        $this->assertEquals(['#####', '#####-####'], $validator->getFormats('US'));
+    }
+
+    /**
+     * @expectedException Detain\ZipZapper\ValidationException 
+     */
+    public function testGetFormatsWithInvalidCountryCode()
+    {
+        $validator = new Validator();
+        $validator->getFormats('invalid_country_code');
+    }
+
+    public function testHasCountry()
+    {
+        $validator = new Validator();
+        $this->assertTrue($validator->hasCountry('US'));
+        $this->assertFalse($validator->hasCountry('invalid_country_code'));
     }
 
 }

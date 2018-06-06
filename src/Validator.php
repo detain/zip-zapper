@@ -13,7 +13,7 @@ namespace Detain\ZipZapper;
  * @author Joe Huss <detain@interserver.net>
  */
 class Validator {
-	protected $zip_names = [
+	protected $zipNames = [
 		'BR' => ['name' => 'CEP', 'acronym_text' => 'Código de endereçamento postal (Postal Addressing Code)'],
 		'CA' => ['name' => 'Postal Code', 'acronym_text' => ''],
 		'CH' => ['name' => 'NPA', 'acronym_text' => "numéro postal d'acheminement in French-speaking Switzerland and numéro postal d'acheminement in Italian-speaking Switzerland"],

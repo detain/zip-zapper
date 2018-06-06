@@ -11,6 +11,7 @@ php:
   - 5.6
   - 7.0
   - 7.1
+  - 7.2
 cache:
   directories:
     - $HOME/.composer/cache/files
@@ -26,8 +27,8 @@ before_script:
   - travis_retry composer self-update
   - travis_retry composer update --with-dependencies --no-interaction --dev --prefer-dist
 script: 
-  - if [ "$TRAVIS_PHP_VERSION" = "7.0" ]; then phpdbg -qrr vendor/bin/phpunit --bootstrap tests/bootstrap.php tests/ -v --coverage-clover coverage.xml --whitelist src/; fi;
-  - if [ "$TRAVIS_PHP_VERSION" != "7.0" ]; then vendor/bin/phpunit --bootstrap tests/bootstrap.php tests/ -v; fi
+  - if [ "$TRAVIS_PHP_VERSION" = "7.0" ]; then phpdbg -qrr vendor/bin/phpunit tests/ -v --coverage-clover coverage.xml --whitelist src/; fi;
+  - if [ "$TRAVIS_PHP_VERSION" != "7.0" ]; then vendor/bin/phpunit tests/ -v; fi
 after_success:
   - if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_PHP_VERSION" == "7.0" ]; then travis_retry vendor/bin/test-reporter --coverage-report=coverage.xml; fi
   - if [ "$TRAVIS_PHP_VERSION" = "7.0" ]; then travis_retry bash <(curl -s https://codecov.io/bash); fi;

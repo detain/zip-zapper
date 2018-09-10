@@ -12,7 +12,8 @@ namespace Detain\ZipZapper;
  *
  * @author Joe Huss <detain@interserver.net>
  */
-class Validator {
+class Validator
+{
 	protected $zipNames = [
 		'BR' => ['name' => 'CEP', 'acronym_text' => 'Código de endereçamento postal (Postal Addressing Code)'],
 		'CA' => ['name' => 'Postal Code', 'acronym_text' => ''],
@@ -291,21 +292,25 @@ class Validator {
 	 * @return bool
 	 * @throws \Detain\ZipZapper\ValidationException
 	 */
-	public function isValid($countryCode, $postalCode, $ignoreSpaces = FALSE) {
+	public function isValid($countryCode, $postalCode, $ignoreSpaces = false)
+	{
 		//$postalCode = str_replace('-', '', $postalCode);
-		if (!isset($this->formats[$countryCode]))
+		if (!isset($this->formats[$countryCode])) {
 			throw new ValidationException(sprintf('Invalid country code: "%s"', $countryCode));
+		}
 
 		foreach ($this->formats[$countryCode] as $format) {
 			#echo $postalCode.' - '.$this->getFormatPattern($format).PHP_EOL;
-			if (preg_match($this->getFormatPattern($format, $ignoreSpaces), $postalCode))
-				return TRUE;
+			if (preg_match($this->getFormatPattern($format, $ignoreSpaces), $postalCode)) {
+				return true;
+			}
 		}
 
-		if (!count($this->formats[$countryCode]))
-			return TRUE;
+		if (!count($this->formats[$countryCode])) {
+			return true;
+		}
 
-		return FALSE;
+		return false;
 	}
 
 	/**
@@ -313,9 +318,11 @@ class Validator {
 	 * @return mixed
 	 * @throws \Detain\ZipZapper\ValidationException
 	 */
-	public function getFormats($countryCode) {
-		if (!isset($this->formats[$countryCode]))
+	public function getFormats($countryCode)
+	{
+		if (!isset($this->formats[$countryCode])) {
 			throw new ValidationException(sprintf('Invalid country code: "%s"', $countryCode));
+		}
 
 		return $this->formats[$countryCode];
 	}
@@ -324,7 +331,8 @@ class Validator {
 	 * @param $countryCode
 	 * @return bool
 	 */
-	public function hasCountry($countryCode) {
+	public function hasCountry($countryCode)
+	{
 		return isset($this->formats[$countryCode]);
 	}
 
@@ -333,13 +341,15 @@ class Validator {
 	 * @param bool $ignoreSpaces
 	 * @return string
 	 */
-	protected function getFormatPattern($format, $ignoreSpaces = FALSE) {
+	protected function getFormatPattern($format, $ignoreSpaces = false)
+	{
 		//$format = str_replace('-', '', $format);
 		$pattern = str_replace('#', '\d', $format);
 		$pattern = str_replace('@', '[a-zA-Z]', $pattern);
 
-		if ($ignoreSpaces)
+		if ($ignoreSpaces) {
 			$pattern = str_replace(' ', ' ?', $pattern);
+		}
 
 		return '/^'.$pattern.'$/';
 	}
@@ -348,11 +358,13 @@ class Validator {
 	 * @param $countryCode
 	 * @return string
 	 */
-	public function getZipName($countryCode) {
-		if (isset($this->zipNames[$countryCode]))
+	public function getZipName($countryCode)
+	{
+		if (isset($this->zipNames[$countryCode])) {
 			$name = $this->zipNames[$countryCode]['name'];
-		else
+		} else {
 			$name = 'Postal Code';
+		}
 		return $name;
 	}
 }

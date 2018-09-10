@@ -8,11 +8,14 @@
  * @return array
  * @internal param mixed $
  */
-function get_codes_from($what, $codes) {
+function get_codes_from($what, $codes)
+{
 	$what = explode(',', $what);
-	foreach ($what as $eachArea)
-		if (trim($eachArea) != '' && trim($eachArea) != '- no codes -')
+	foreach ($what as $eachArea) {
+		if (trim($eachArea) != '' && trim($eachArea) != '- no codes -') {
 			$codes[] = "'".trim($eachArea)."'";
+		}
+	}
 	return $codes;
 }
 
@@ -45,8 +48,9 @@ for ($x = 0, $xMax = sizeof($lines); $x < $xMax; $x++) {
 $db = $GLOBALS['tf']->db;
 $db->query('select * from country_t order by iso2;');
 while ($db->next_record(MYSQL_ASSOC)) {
-	if (!in_array($db->Record['iso2'], $found))
+	if (!in_array($db->Record['iso2'], $found)) {
 		echo "		'{$db->Record['iso2']}' => [],			// {$db->Record['short_name']}\n";
+	}
 }
 exit;
 

@@ -160,7 +160,7 @@ class Validator
 		'KZ' => ['######'], // Kazakhstan, Notes: &lt;ref&gt;[http://eshop.kazpost.kz/QueryForm.php Kazakhstan's postal codes]&lt;/ref&gt;
 		'LA' => ['#####'], // Laos
 		'LB' => ['#####', '#### ####'], // Lebanon, Notes: The first four digits represent the region or postal zone,the last four digits represent the building see also [http://postal-codes.net/lebanon_postal_codes/ Lebanon Postal code website].
-		'LC' => ['LC##  ###'], // Saint Lucia, Notes: The first two letters are always LC. There are two spaces between the second and third digits.
+		'LC' => ['LC##  ###', 'LC## ###'], // Saint Lucia, Notes: The first two letters are always LC. There are two spaces between the second and third digits.
 		'LI' => ['####'], // Liechtenstein, Notes: With Switzerland, ordered from west to east. Range '''9485''' - '''9498'''.
 		'LK' => ['#####'], // Sri Lanka, Notes: Reference: http://mohanjith.net/ZIPLook/ Incorporates Colombo postal districts, e.g.: Colombo 1 is &quot;00100&quot;. You can search for specific postal codes [http://www.slpost.gov.lk here].
 		'LR' => ['####'], // Liberia, Notes: Two digit postal zone after city name.

@@ -167,7 +167,7 @@ class Validator
 		'LS' => ['###'], // Lesotho
 		'LT' => ['LT-#####'], // Lithuania, Notes: References: http://www.post.lt/en/help/postal-code-search. Previously '''9999''' which was actually the old Soviet Union|Soviet '''999999''' format code with the first 2 digits dropped.
 		'LU' => ['####'], // Luxembourg, Notes: References: http://www.upu.int/post_code/en/countries/LUX.pdf
-		'LV' => ['CC-####'], // Latvia
+		'LV' => ['LV-####'], // Latvia
 		'LY' => [], // Libya
 		'MA' => ['#####'], // Morocco
 		'MC' => ['980##'], // Monaco, Notes: Uses the French Postal System, but with an &quot;MC&quot; Prefix for Monaco. Code range 98000-98099

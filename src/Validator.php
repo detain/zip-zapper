@@ -261,7 +261,7 @@ class Validator
 		'TT' => ['######'], // Trinidad and Tobago, Notes: First two digits specify a postal district (one of 72), next two digits a carrier route, last two digits a building or zone along that route
 		'TV' => [], // Tuvalu
 		'TW' => ['###', '###-##'], // Taiwan, Notes: The first three digits of the postal code are required; the last two digits are optional. Codes are known as ''youdi quhao'' (郵遞區號), and are also assigned to Senkaku Islands (''Diaoyutai''), though Japanese-administered,  the Pratas Islands and the Spratly Islands. See List of postal codes in Taiwan.
-		'TZ' => ['#####'], // Tanzania
+		'TZ' => ['###', '###-##'], // Tanzania
 		'UA' => ['#####'], // Ukraine
 		'UG' => [], // Uganda
 		'UM' => [], // United States Minor Outlying Islands

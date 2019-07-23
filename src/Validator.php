@@ -12,8 +12,9 @@ namespace Detain\ZipZapper;
  *
  * @author Joe Huss <detain@interserver.net>
  */
-class Validator {
-	protected $zip_names = [
+class Validator
+{
+	protected $zipNames = [
 		'BR' => ['name' => 'CEP', 'acronym_text' => 'Código de endereçamento postal (Postal Addressing Code)'],
 		'CA' => ['name' => 'Postal Code', 'acronym_text' => ''],
 		'CH' => ['name' => 'NPA', 'acronym_text' => "numéro postal d'acheminement in French-speaking Switzerland and numéro postal d'acheminement in Italian-speaking Switzerland"],
@@ -159,14 +160,14 @@ class Validator {
 		'KZ' => ['######'], // Kazakhstan, Notes: &lt;ref&gt;[http://eshop.kazpost.kz/QueryForm.php Kazakhstan's postal codes]&lt;/ref&gt;
 		'LA' => ['#####'], // Laos
 		'LB' => ['#####', '#### ####'], // Lebanon, Notes: The first four digits represent the region or postal zone,the last four digits represent the building see also [http://postal-codes.net/lebanon_postal_codes/ Lebanon Postal code website].
-		'LC' => ['LC##  ###'], // Saint Lucia, Notes: The first two letters are always LC. There are two spaces between the second and third digits.
+		'LC' => ['LC##  ###', 'LC## ###'], // Saint Lucia, Notes: The first two letters are always LC. There are two spaces between the second and third digits.
 		'LI' => ['####'], // Liechtenstein, Notes: With Switzerland, ordered from west to east. Range '''9485''' - '''9498'''.
 		'LK' => ['#####'], // Sri Lanka, Notes: Reference: http://mohanjith.net/ZIPLook/ Incorporates Colombo postal districts, e.g.: Colombo 1 is &quot;00100&quot;. You can search for specific postal codes [http://www.slpost.gov.lk here].
 		'LR' => ['####'], // Liberia, Notes: Two digit postal zone after city name.
 		'LS' => ['###'], // Lesotho
-		'LT' => ['CC-#####'], // Lithuania, Notes: References: http://www.post.lt/en/help/postal-code-search. Previously '''9999''' which was actually the old Soviet Union|Soviet '''999999''' format code with the first 2 digits dropped.
+		'LT' => ['LT-#####'], // Lithuania, Notes: References: http://www.post.lt/en/help/postal-code-search. Previously '''9999''' which was actually the old Soviet Union|Soviet '''999999''' format code with the first 2 digits dropped.
 		'LU' => ['####'], // Luxembourg, Notes: References: http://www.upu.int/post_code/en/countries/LUX.pdf
-		'LV' => ['CC-####'], // Latvia
+		'LV' => ['LV-####'], // Latvia
 		'LY' => [], // Libya
 		'MA' => ['#####'], // Morocco
 		'MC' => ['980##'], // Monaco, Notes: Uses the French Postal System, but with an &quot;MC&quot; Prefix for Monaco. Code range 98000-98099
@@ -260,7 +261,7 @@ class Validator {
 		'TT' => ['######'], // Trinidad and Tobago, Notes: First two digits specify a postal district (one of 72), next two digits a carrier route, last two digits a building or zone along that route
 		'TV' => [], // Tuvalu
 		'TW' => ['###', '###-##'], // Taiwan, Notes: The first three digits of the postal code are required; the last two digits are optional. Codes are known as ''youdi quhao'' (郵遞區號), and are also assigned to Senkaku Islands (''Diaoyutai''), though Japanese-administered,  the Pratas Islands and the Spratly Islands. See List of postal codes in Taiwan.
-		'TZ' => ['#####'], // Tanzania
+		'TZ' => ['###', '###-##'], // Tanzania
 		'UA' => ['#####'], // Ukraine
 		'UG' => [], // Uganda
 		'UM' => [], // United States Minor Outlying Islands
@@ -291,21 +292,25 @@ class Validator {
 	 * @return bool
 	 * @throws \Detain\ZipZapper\ValidationException
 	 */
-	public function isValid($countryCode, $postalCode, $ignoreSpaces = FALSE) {
+	public function isValid($countryCode, $postalCode, $ignoreSpaces = false)
+	{
 		//$postalCode = str_replace('-', '', $postalCode);
-		if (!isset($this->formats[$countryCode]))
+		if (!isset($this->formats[$countryCode])) {
 			throw new ValidationException(sprintf('Invalid country code: "%s"', $countryCode));
+		}
 
 		foreach ($this->formats[$countryCode] as $format) {
 			#echo $postalCode.' - '.$this->getFormatPattern($format).PHP_EOL;
-			if (preg_match($this->getFormatPattern($format, $ignoreSpaces), $postalCode))
-				return TRUE;
+			if (preg_match($this->getFormatPattern($format, $ignoreSpaces), $postalCode)) {
+				return true;
+			}
 		}
 
-		if (!count($this->formats[$countryCode]))
-			return TRUE;
+		if (!count($this->formats[$countryCode])) {
+			return true;
+		}
 
-		return FALSE;
+		return false;
 	}
 
 	/**
@@ -313,9 +318,11 @@ class Validator {
 	 * @return mixed
 	 * @throws \Detain\ZipZapper\ValidationException
 	 */
-	public function getFormats($countryCode) {
-		if (!isset($this->formats[$countryCode]))
+	public function getFormats($countryCode)
+	{
+		if (!isset($this->formats[$countryCode])) {
 			throw new ValidationException(sprintf('Invalid country code: "%s"', $countryCode));
+		}
 
 		return $this->formats[$countryCode];
 	}
@@ -324,7 +331,8 @@ class Validator {
 	 * @param $countryCode
 	 * @return bool
 	 */
-	public function hasCountry($countryCode) {
+	public function hasCountry($countryCode)
+	{
 		return isset($this->formats[$countryCode]);
 	}
 
@@ -333,13 +341,15 @@ class Validator {
 	 * @param bool $ignoreSpaces
 	 * @return string
 	 */
-	protected function getFormatPattern($format, $ignoreSpaces = FALSE) {
+	protected function getFormatPattern($format, $ignoreSpaces = false)
+	{
 		//$format = str_replace('-', '', $format);
 		$pattern = str_replace('#', '\d', $format);
 		$pattern = str_replace('@', '[a-zA-Z]', $pattern);
 
-		if ($ignoreSpaces)
+		if ($ignoreSpaces) {
 			$pattern = str_replace(' ', ' ?', $pattern);
+		}
 
 		return '/^'.$pattern.'$/';
 	}
@@ -348,11 +358,13 @@ class Validator {
 	 * @param $countryCode
 	 * @return string
 	 */
-	public function getZipName($countryCode) {
-		if (isset($this->zipNames[$countryCode]))
+	public function getZipName($countryCode)
+	{
+		if (isset($this->zipNames[$countryCode])) {
 			$name = $this->zipNames[$countryCode]['name'];
-		else
+		} else {
 			$name = 'Postal Code';
+		}
 		return $name;
 	}
 }

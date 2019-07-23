@@ -170,7 +170,7 @@ class Validator {
 		'LY' => [], // Libya
 		'MA' => ['#####'], // Morocco
 		'MC' => ['980##'], // Monaco, Notes: Uses the French Postal System, but with an &quot;MC&quot; Prefix for Monaco. Code range 98000-98099
-		'MD' => ['CC####', 'CC-####'], // Moldova
+		'MD' => ['MD####', 'MD-####'], // Moldova
 		'ME' => ['#####'], // Montenegro
 		'MF' => ['97150'], // Saint Martin, Notes: Overseas Collectivity of France. French codes used.
 		'MG' => ['###'], // Madagascar

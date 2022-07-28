@@ -5,7 +5,7 @@
  *
  * @author Joe Huss <detain@interserver.net>
  */
- 
+
 namespace Detain\ZipZapper;
 
 /**
@@ -13,7 +13,7 @@ namespace Detain\ZipZapper;
  *
  * @author Joe Huss <detain@interserver.net>
  */
- 
+
 class ValidationException extends \Exception
 {
 }

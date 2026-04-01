@@ -28,6 +28,14 @@ class ValidatorTest extends TestCase
         $this->assertTrue($validator->isValid('GB', 'BD16 3QA'));
     }
 
+    public function testIrelandCode()
+    {
+        $validator = new Validator();
+        // Please be careful and test Ireland postcodes of public places only, as they identify individual properties.
+        $this->assertTrue($validator->isValid('IE', 'D09 RHN3'));
+        $this->assertTrue($validator->isValid('IE', 'D09 V327'));
+    }
+
     public function testSwissCode()
     {
         $validator = new Validator();

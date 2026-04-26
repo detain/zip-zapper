@@ -63,7 +63,7 @@ for ($x = 0, $xMax = sizeof($lines); $x < $xMax; $x++) {
         ];
     }
 }
-$db = $GLOBALS['tf']->db;
+$db = \MyAdmin\App::db();
 $db->query('select * from country_t order by iso2;');
 while ($db->next_record(MYSQL_ASSOC)) {
     if (!in_array($db->Record['iso2'], $found)) {

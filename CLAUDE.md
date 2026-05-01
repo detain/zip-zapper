@@ -7,7 +7,7 @@ PHP library for validating postal/ZIP codes by country.
 ```bash
 composer install                          # install deps
 vendor/bin/phpunit tests/ -v              # run all tests
-vendor/bin/phpunit tests/ -v --coverage-clover coverage.xml --whitelist src/  # with coverage
+vendor/bin/phpunit tests/ -v --coverage-clover coverage.xml  # with coverage
 php bin/parse.php                         # regenerate country format data from Wikipedia
 ```
 
@@ -23,11 +23,13 @@ php bin/parse.php                         # regenerate country format data from 
 
 **`Detain\ZipZapper\Validator`** (`src/Validator.php`):
 - `$formats` — associative array keyed by ISO 3166-1 alpha-2 country code, values are arrays of format strings
-- `$zipNames` — country-specific postal code naming (CEP, PLZ, PIN, Eircode, etc.)
+- `$zipNames` — country-specific postal code naming; each entry is `['name' => '...', 'acronym_text' => '...']`
 - `isValid($countryCode, $postalCode, $ignoreSpaces = false)` — validates code against all formats for country
 - `getFormats($countryCode)` — returns format array for country
 - `hasCountry($countryCode)` — returns bool
 - `getZipName($countryCode)` — returns localized name (defaults to `'Postal Code'`)
+- `getZipAcronym($countryCode)` — returns descriptive expansion of acronym (`''` for unknown/none)
+- `getCountries()` — returns all ISO 3166-1 alpha-2 country codes in the registry
 - `getFormatPattern($format, $ignoreSpaces)` — converts format string to regex: `#` → `\d`, `@` → `[a-zA-Z]`
 
 **`Detain\ZipZapper\ValidationException`** (`src/ValidationException.php`):
@@ -53,6 +55,9 @@ Example formats: `'@#@ #@#'` (Canada), `'### ##'` (Sweden), `'@## @#@#'` (Irelan
 Example:
 ```php
 'XX' => ['#####', '#####-####'], // Country Name
+
+// In $zipNames (optional):
+'XX' => ['name' => 'Local Name', 'acronym_text' => 'Full expansion of acronym'],
 ```
 
 ## Updating Format Data from Wikipedia
@@ -68,7 +73,7 @@ Note: `bin/parse.php` requires `getcurlpage()` and other functions from the pare
 - Methods: camelCase (`isValid`, `getFormats`, `hasCountry`, `getZipName`)
 - No closing PHP tag in class files
 - Doc comments: required on public methods (Scrutinizer enforces `parameter_doc_comments`, `return_doc_comments`)
-- `phpunit.xml.dist` configures test suite bootstrap
+- `phpunit.xml.dist` configures test suite bootstrap (PHPUnit 9: `<coverage>/<include>` replaces `<filter>/<whitelist>`)
 
 ## Testing Patterns
 
@@ -83,6 +88,10 @@ $this->assertTrue($validator->isValid('CZ', '60200', true));
 $this->assertEquals('ZIP code', $validator->getZipName('US'));
 // Test format retrieval
 $this->assertEquals(['#####', '#####-####'], $validator->getFormats('US'));
+// Test acronym
+$this->assertEquals('Zone Improvement Plan', $validator->getZipAcronym('US'));
+// Test country list
+$this->assertContains('US', $validator->getCountries());
 ```
 
 ## CI
@@ -108,6 +117,10 @@ grep -q "caliber" .git/hooks/pre-commit 2>/dev/null && echo "hook-active" || ech
   2. Run: `caliber refresh && git add CLAUDE.md .claude/ .cursor/ .cursorrules .github/copilot-instructions.md .github/instructions/ AGENTS.md CALIBER_LEARNINGS.md .agents/ .opencode/ 2>/dev/null`
   3. After it completes, briefly tell the user what Caliber updated. Then proceed with the commit.
 
+**Valid `caliber refresh` options:** `--quiet` (suppress output) and `--dry-run` (preview without writing). Do not pass any other flags — options like `--auto-approve`, `--debug`, or `--force` do not exist and will cause errors.
+
+**`caliber config`** takes no flags — it runs an interactive provider setup. Do not pass `--provider`, `--api-key`, or `--endpoint`.
+
 If `caliber` is not found, tell the user: "This project uses Caliber for agent config sync. Run /setup-caliber to get set up."
 <!-- /caliber:managed:pre-commit -->
 
@@ -117,6 +130,15 @@ If `caliber` is not found, tell the user: "This project uses Caliber for agent c
 Read `CALIBER_LEARNINGS.md` for patterns and anti-patterns learned from previous sessions.
 These are auto-extracted from real tool usage — treat them as project-specific rules.
 <!-- /caliber:managed:learnings -->
+
+<!-- caliber:managed:model-config -->
+## Model Configuration
+
+Recommended default: `claude-sonnet-4-6` with high effort (stronger reasoning; higher cost and latency than smaller models).
+Smaller/faster models trade quality for speed and cost — pick what fits the task.
+Pin your choice (`/model` in Claude Code, or `CALIBER_MODEL` when using Caliber with an API provider) so upstream default changes do not silently change behavior.
+
+<!-- /caliber:managed:model-config -->
 
 <!-- caliber:managed:sync -->
 ## Context Sync

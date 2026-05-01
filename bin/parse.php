@@ -1,12 +1,38 @@
 <?php
 /**
- * @link     https://en.wikipedia.org/wiki/Category:Postal_system Postal Systems by Country
- * @link     http://dmoztools.net/Reference/Directories/Address_and_Phone_Numbers/Postal_Codes/ DMOZ Post/Zip Code Info+DB
- * @link     https://en.wikipedia.org/wiki/List_of_postal_codes List of Postal Codes
- * @param $what
- * @param $codes
- * @return array
- * @internal param mixed $
+ * Parser: regenerate the $formats array in src/Validator.php from Wikipedia.
+ *
+ * Fetches https://en.wikipedia.org/wiki/Special:Export/List_of_postal_codes,
+ * parses the wikitext table, merges with the country_t DB table (for countries
+ * not listed on Wikipedia), and prints sorted PHP array lines to stdout.
+ *
+ * NOTE: This script requires the parent MyAdmin environment.  It must be run
+ * from a MyAdmin installation where the relative path
+ * __DIR__ . '/../../../../include/functions.inc.php' resolves correctly
+ * (i.e. the package is installed at vendor/detain/zip-zapper/).
+ *
+ * @link https://en.wikipedia.org/wiki/Category:Postal_system     Postal Systems by Country
+ * @link https://en.wikipedia.org/wiki/List_of_postal_codes        List of Postal Codes
+ */
+
+/**
+ * Convert a raw Wikipedia postal-code cell into an array of format strings.
+ *
+ * Wikipedia uses 'N' for a digit and 'A' for a letter; this function
+ * translates those to the '#' / '@' symbols used by Validator.
+ * 'CC' is replaced with the ISO 3166-1 alpha-2 country code.
+ *
+ * KNOWN LIMITATION: Wikipedia entries describing a single literal code
+ * (e.g. 'AI-2640' for Anguilla, 'BIOT 1ZZ' for British Indian Ocean Territory)
+ * can contain literal letters that this routine cannot distinguish from
+ * format-symbol 'A's, and they will be mangled (e.g. 'AI-2640' → '@I-2640').
+ * Generated output should be reviewed and corrected by hand for these cases
+ * before being pasted into Validator::$formats.
+ *
+ * @param  string   $what  Comma-separated list of format patterns from the wikitext cell.
+ * @param  string[] $codes Existing codes array to append to.
+ * @param  string   $iso   ISO 3166-1 alpha-2 country code for 'CC' substitution.
+ * @return string[]        Updated codes array.
  */
 function get_codes_from($what, $codes, $iso)
 {

@@ -6,8 +6,9 @@ PHP library for validating postal/ZIP codes by country.
 
 ```bash
 composer install                          # install deps
-vendor/bin/phpunit tests/ -v              # run all tests
-vendor/bin/phpunit tests/ -v --coverage-clover coverage.xml  # with coverage
+composer test                             # run the test suite (PHPUnit 9)
+vendor/bin/phpunit tests/ -v              # run all tests (verbose)
+vendor/bin/phpunit tests/ -v --coverage-clover coverage.xml --whitelist src/  # with coverage
 php bin/parse.php                         # regenerate country format data from Wikipedia
 ```
 
@@ -23,13 +24,13 @@ php bin/parse.php                         # regenerate country format data from 
 
 **`Detain\ZipZapper\Validator`** (`src/Validator.php`):
 - `$formats` — associative array keyed by ISO 3166-1 alpha-2 country code, values are arrays of format strings
-- `$zipNames` — country-specific postal code naming; each entry is `['name' => '...', 'acronym_text' => '...']`
+- `$zipNames` — country-specific postal code naming; each entry `['name' => '...', 'acronym_text' => '...']`
 - `isValid($countryCode, $postalCode, $ignoreSpaces = false)` — validates code against all formats for country
 - `getFormats($countryCode)` — returns format array for country
 - `hasCountry($countryCode)` — returns bool
 - `getZipName($countryCode)` — returns localized name (defaults to `'Postal Code'`)
-- `getZipAcronym($countryCode)` — returns descriptive expansion of acronym (`''` for unknown/none)
-- `getCountries()` — returns all ISO 3166-1 alpha-2 country codes in the registry
+- `getZipAcronym($countryCode)` — returns acronym expansion (defaults to `''`, never throws)
+- `getCountries()` — returns all registered ISO 3166-1 alpha-2 country codes as `string[]`
 - `getFormatPattern($format, $ignoreSpaces)` — converts format string to regex: `#` → `\d`, `@` → `[a-zA-Z]`
 
 **`Detain\ZipZapper\ValidationException`** (`src/ValidationException.php`):
@@ -55,9 +56,11 @@ Example formats: `'@#@ #@#'` (Canada), `'### ##'` (Sweden), `'@## @#@#'` (Irelan
 Example:
 ```php
 'XX' => ['#####', '#####-####'], // Country Name
+```
 
-// In $zipNames (optional):
-'XX' => ['name' => 'Local Name', 'acronym_text' => 'Full expansion of acronym'],
+Optional `$zipNames` entry:
+```php
+'XX' => ['name' => 'Local Name', 'acronym_text' => 'Full acronym expansion'],
 ```
 
 ## Updating Format Data from Wikipedia
@@ -73,7 +76,7 @@ Note: `bin/parse.php` requires `getcurlpage()` and other functions from the pare
 - Methods: camelCase (`isValid`, `getFormats`, `hasCountry`, `getZipName`)
 - No closing PHP tag in class files
 - Doc comments: required on public methods (Scrutinizer enforces `parameter_doc_comments`, `return_doc_comments`)
-- `phpunit.xml.dist` configures test suite bootstrap (PHPUnit 9: `<coverage>/<include>` replaces `<filter>/<whitelist>`)
+- `phpunit.xml.dist` configures test suite bootstrap (PHPUnit 9 syntax: `<coverage>/<include>` replaces `<filter>/<whitelist>`)
 
 ## Testing Patterns
 
@@ -86,10 +89,11 @@ $this->assertFalse($validator->isValid('CZ', '60200'));
 $this->assertTrue($validator->isValid('CZ', '60200', true));
 // Test zip name
 $this->assertEquals('ZIP code', $validator->getZipName('US'));
+// Test zip acronym
+$this->assertEquals('Zone Improvement Plan', $validator->getZipAcronym('US'));
+$this->assertEquals('', $validator->getZipAcronym('CA')); // no acronym registered
 // Test format retrieval
 $this->assertEquals(['#####', '#####-####'], $validator->getFormats('US'));
-// Test acronym
-$this->assertEquals('Zone Improvement Plan', $validator->getZipAcronym('US'));
 // Test country list
 $this->assertContains('US', $validator->getCountries());
 ```

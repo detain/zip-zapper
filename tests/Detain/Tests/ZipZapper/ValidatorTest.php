@@ -37,6 +37,18 @@ class ValidatorTest extends TestCase
 	}
 
 	/**
+	 * Irish Eircode postcodes (routing key + unique identifier) must validate.
+	 *
+	 * Please test Ireland postcodes of public places only, as they identify individual properties.
+	 */
+	public function testIrelandCode(): void
+	{
+		$validator = new Validator();
+		$this->assertTrue($validator->isValid('IE', 'D09 RHN3'));
+		$this->assertTrue($validator->isValid('IE', 'D09 V327'));
+	}
+
+	/**
 	 * Swiss four-digit NPA codes must validate.
 	 */
 	public function testSwissCode(): void

@@ -8,12 +8,26 @@
 namespace Detain\ZipZapper;
 
 /**
- * Validator.
+ * Validates postal / ZIP codes for countries worldwide.
+ *
+ * Each country is identified by its ISO 3166-1 alpha-2 code.
+ * Format strings use '#' for a digit (0-9) and '@' for a letter (a-zA-Z).
+ * Countries with an empty formats array have no postal code system; any
+ * value (including an empty string) is considered valid for those countries.
  *
  * @author Joe Huss <detain@interserver.net>
  */
 class Validator
 {
+    /**
+     * Country-specific names for the postal code concept.
+     *
+     * Each entry maps an ISO 3166-1 alpha-2 country code to an array with:
+     *   - 'name'         — the local name (e.g. 'ZIP code', 'PLZ', 'Eircode')
+     *   - 'acronym_text' — optional expansion of the abbreviation
+     *
+     * @var array<string, array{name: string, acronym_text: string}>
+     */
     protected $zipNames = [
         'BR' => ['name' => 'CEP', 'acronym_text' => 'Código de endereçamento postal (Postal Addressing Code)'],
         'CA' => ['name' => 'Postal Code', 'acronym_text' => ''],
@@ -26,23 +40,30 @@ class Validator
         'US' => ['name' => 'ZIP code', 'acronym_text' => 'Zone Improvement Plan']
     ];
 
-    /*
-     * country code: ISO 3166 2-letter code
-     * format:
-     *     # - numberic 0-9
-     *     @ - alpha a-zA-Z
+    /**
+     * Postal code format registry keyed by ISO 3166-1 alpha-2 country code.
+     *
+     * Each value is an array of format strings.  An empty array means the
+     * country has no postal code system (isValid() returns true for any input).
+     *
+     * Format symbols:
+     *   '#' — matches exactly one digit  [0-9]
+     *   '@' — matches exactly one letter [a-zA-Z]
+     *   ' ' — matches a literal space (or is made optional via $ignoreSpaces)
+     *
+     * @var array<string, string[]>
      */
     protected $formats = [
         'AD' => ['AD###'], // Andorra, Notes: | 2004 Each [[Parishes of Andorra|parish]] now has its own post code.
         'AE' => [], // United Arab Emirates
         'AF' => ['####'], // Afghanistan, Notes: | 2011 The first two digits (ranging from 10–43) correspond to the province, while the last two digits correspond either to the city/delivery zone (range 01–50) or to the district/delivery zone (range 51–99). [https://web.archive.org/web/20130723140604/http://postalcode.afghanpost.gov.af/ Afghanistan Postal code lookup]. [https://youbianku.com/files/upu/AFG.pdf UPU: Afghanistan].
         'AG' => [], // Antigua and Barbuda
-        'AI' => ['@I-2640'], // Anguilla, Notes: | 2007 Single code used for all addresses.
+        'AI' => ['AI-2640'], // Anguilla, Notes: | 2007 Single code used for all addresses.
         'AL' => ['####'], // Albania, Notes: | 2006 Introduced in 2006, gradually implemented throughout 2007.
         'AM' => ['####'], // Armenia, Notes: | 2006-04-01 Previously used '''NNNNNN''' system inherited from former [[Soviet Union]].
         'AO' => [], // Angola
         'AQ' => ['BIQQ 1ZZ'], // British Antarctic Territory, Notes: | One code for all addresses (AAAA NAA). UK territory, but not UK postcode.
-        'AR' => ['####', '####', '@####@@@'], // Argentina, Notes: | 1974, modified 1999 1974-1998 NNNN, and from 1999 ANNNNAAA. Codigo Postal Argentino (CPA), where the first A is the province code as in [[ISO 3166-2:AR]], the four numbers are the old postal codes, the three last letters indicate a side of the block. Previously '''NNNN''' which is the minimum requirement as of 2006, but ANNNNAAA is not mandatory.
+        'AR' => ['####', '@####@@@'], // Argentina, Notes: | 1974, modified 1999 1974-1998 NNNN, and from 1999 ANNNNAAA. Codigo Postal Argentino (CPA), where the first A is the province code as in [[ISO 3166-2:AR]], the four numbers are the old postal codes, the three last letters indicate a side of the block. Previously '''NNNN''' which is the minimum requirement as of 2006, but ANNNNAAA is not mandatory.
         'AS' => ['#####', '#####-####'], // American Samoa, Notes: | 1963-07-01 U.S. ZIP codes (range '''96799''')
         'AT' => ['####'], // Austria, Notes: | 1966 The first digit denotes regions, which are partly identical to one of the nine provinces—called ''Bundesländer''; the last the nearest post office in the area.
         'AU' => ['####'], // Australia, Notes: | 1967 In general, the first digit identifies the state or territory.
@@ -63,7 +84,7 @@ class Validator
         'BN' => ['@@####'], // Brunei
         'BO' => ['####'], // Bolivia
         'BQ' => [], // Bonaire, Sint Eustatius and Saba
-        'BR' => ['#####', '#####-###', '#####-###'], // Brazil, Notes: | 1971 NNNNN only from 1971 to 1992. Código de Endereçamento Postal (CEP): -000 to -899 are used for streets, roads, avenues, boulevards; -900 to -959 are used for buildings with a high postal use; -960 to -969 are for promotional use; -970 to -989 are post offices and regular P.O. boxes; and -990 to -998 are used for community P.O. boxes. -999 is used for special services.
+        'BR' => ['#####', '#####-###'], // Brazil, Notes: | 1971 NNNNN only from 1971 to 1992. Código de Endereçamento Postal (CEP): -000 to -899 are used for streets, roads, avenues, boulevards; -900 to -959 are used for buildings with a high postal use; -960 to -969 are for promotional use; -970 to -989 are post offices and regular P.O. boxes; and -990 to -998 are used for community P.O. boxes. -999 is used for special services.
         'BS' => [], // Bahamas
         'BT' => ['#####'], // Bhutan, Notes: | 2010 Written Behind the village name. Digits: postal region (Dzongdey), district (Dzongkhag), sub district (Dungkhag), delivery area (two digits). [https://youbianku.com/files/upu/BTN.pdf UPU: Bhutan].
         'BV' => [], // Bouvet Island
@@ -138,7 +159,7 @@ class Validator
         'IL' => ['#######'], // Israel, Notes: | 2013 In 2013, after the introduction of the 7 digit codes, 5 digit codes were still being used widely.
         'IM' => ['IM# #@@', 'IM## #@@'], // | [[IM postcode area|Isle of Man]], Notes: | 1993 UK-format postcode. The first two letters are always IM.
         'IN' => ['######', '## ###'], // India
-        'IO' => ['BB#D 1ZZ'], // British Indian Ocean Territory, Notes: | One code for all addresses (AAAA NAA). UK territory, but not UK postcode.
+        'IO' => ['BIOT 1ZZ'], // British Indian Ocean Territory, Notes: | One code for all addresses (BIOT 1ZZ). UK territory, but not UK postcode.
         'IQ' => ['#####'], // Iraq
         'IR' => ['##########'], // Iran, Notes: | ([[Persian language|Persian]]: کد پستی)
         'IS' => ['###'], // Iceland
@@ -286,37 +307,44 @@ class Validator
     ];
 
     /**
-     * @param      $countryCode
-     * @param      $postalCode
-     * @param bool $ignoreSpaces
+     * Validate a postal code for the given country.
+     *
+     * Returns true when:
+     *   - the postal code matches at least one of the registered formats, or
+     *   - the country has no postal code system (empty formats array).
+     *
+     * @param  string $countryCode   ISO 3166-1 alpha-2 country code (e.g. 'US', 'GB').
+     * @param  string $postalCode    The postal/ZIP code to validate.
+     * @param  bool   $ignoreSpaces  When true, spaces in the format string become optional.
      * @return bool
-     * @throws \Detain\ZipZapper\ValidationException
+     * @throws ValidationException  If $countryCode is not in the formats registry.
      */
     public function isValid($countryCode, $postalCode, $ignoreSpaces = false)
     {
-        //$postalCode = str_replace('-', '', $postalCode);
         if (!isset($this->formats[$countryCode])) {
             throw new ValidationException(sprintf('Invalid country code: "%s"', $countryCode));
-        }
-
-        foreach ($this->formats[$countryCode] as $format) {
-            #echo $postalCode.' - '.$this->getFormatPattern($format).PHP_EOL;
-            if (preg_match($this->getFormatPattern($format, $ignoreSpaces), $postalCode)) {
-                return true;
-            }
         }
 
         if (!count($this->formats[$countryCode])) {
             return true;
         }
 
+        foreach ($this->formats[$countryCode] as $format) {
+            if (preg_match($this->getFormatPattern($format, $ignoreSpaces), $postalCode)) {
+                return true;
+            }
+        }
+
         return false;
     }
 
     /**
-     * @param $countryCode
-     * @return mixed
-     * @throws \Detain\ZipZapper\ValidationException
+     * Return the registered format strings for a country.
+     *
+     * @param  string $countryCode ISO 3166-1 alpha-2 country code.
+     * @return string[]            Array of format strings (may be empty for countries
+     *                             with no postal code system).
+     * @throws ValidationException If $countryCode is not in the formats registry.
      */
     public function getFormats($countryCode)
     {
@@ -328,8 +356,10 @@ class Validator
     }
 
     /**
-     * @param $countryCode
-     * @return bool
+     * Check whether a country code is present in the formats registry.
+     *
+     * @param  string $countryCode ISO 3166-1 alpha-2 country code.
+     * @return bool   True if the country is known, false otherwise.
      */
     public function hasCountry($countryCode)
     {
@@ -337,13 +367,19 @@ class Validator
     }
 
     /**
-     * @param      $format
-     * @param bool $ignoreSpaces
-     * @return string
+     * Convert a format string into a PCRE regex pattern.
+     *
+     * Substitution rules:
+     *   '#' → '\d'          (one digit)
+     *   '@' → '[a-zA-Z]'    (one ASCII letter)
+     *   ' ' → ' ?' when $ignoreSpaces is true (space becomes optional)
+     *
+     * @param  string $format       A format string from the $formats registry.
+     * @param  bool   $ignoreSpaces When true, spaces in the format are optional.
+     * @return string               A PCRE pattern anchored with ^ and $.
      */
     protected function getFormatPattern($format, $ignoreSpaces = false)
     {
-        //$format = str_replace('-', '', $format);
         $pattern = str_replace('#', '\d', $format);
         $pattern = str_replace('@', '[a-zA-Z]', $pattern);
 
@@ -355,8 +391,13 @@ class Validator
     }
 
     /**
-     * @param $countryCode
-     * @return string
+     * Return the local name used for postal codes in the given country.
+     *
+     * Falls back to the generic 'Postal Code' for countries not listed in
+     * $zipNames (including unknown country codes — no exception is thrown).
+     *
+     * @param  string $countryCode ISO 3166-1 alpha-2 country code.
+     * @return string              e.g. 'ZIP code', 'PLZ', 'Eircode', 'Postal Code'.
      */
     public function getZipName($countryCode)
     {
@@ -366,5 +407,37 @@ class Validator
             $name = 'Postal Code';
         }
         return $name;
+    }
+
+    /**
+     * Return the descriptive expansion for a country's postal code acronym.
+     *
+     * For example, 'US' returns 'Zone Improvement Plan' and 'DE' returns
+     * 'Postleitzahl (Postal Routing Number)'. Returns an empty string for
+     * countries that have a name but no published acronym, or for countries
+     * not present in the $zipNames table.
+     *
+     * @param  string $countryCode ISO 3166-1 alpha-2 country code.
+     * @return string              The acronym expansion, or '' when none is registered.
+     */
+    public function getZipAcronym($countryCode)
+    {
+        if (isset($this->zipNames[$countryCode]) && isset($this->zipNames[$countryCode]['acronym_text'])) {
+            return $this->zipNames[$countryCode]['acronym_text'];
+        }
+        return '';
+    }
+
+    /**
+     * Return every ISO 3166-1 alpha-2 country code known to the validator.
+     *
+     * Includes countries that have an empty formats array (no postal code
+     * system). The list is returned in the order it is declared in $formats.
+     *
+     * @return string[] Array of ISO 3166-1 alpha-2 country codes.
+     */
+    public function getCountries()
+    {
+        return array_keys($this->formats);
     }
 }

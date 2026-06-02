@@ -1,7 +1,7 @@
 {
 	"name": "detain/zip-zapper",
 	"type": "library",
-	"description": "Validates Zip\/Postal Codes for any country and gives that countries name for thier verions of Zip\/Post code",
+	"description": "Validates Zip\/Postal Codes for any country and provides each country's localized name for their version of the Zip\/Postal code (CEP, PLZ, PIN code, Eircode, NPA, CAP, ZIP code, etc.).",
 	"keywords": [
 		"postcode",
 		"zip",
@@ -16,11 +16,10 @@
 		"pin code",
 		"plz",
 		"postal expedition code",
-		"postal addressing codde",
-		"numro postal dacheminement",
-		"numro postal dacheminement",
+		"postal addressing code",
+		"numero postal d'acheminement",
 		"postal index number",
-		"Postal Routing Number",
+		"postal routing number",
 		"zone improvement plan"
 	],
 	"homepage": "https:\/\/detain.github.io\/zip-zapper",
@@ -36,11 +35,19 @@
 			"Detain\\ZipZapper\\": "src/"
 		}
 	},
+	"autoload-dev": {
+		"psr-4": {
+			"Detain\\Tests\\ZipZapper\\": "tests/Detain/Tests/ZipZapper/"
+		}
+	},
 	"require": {
-		"php": ">=5.4"
-    },
+		"php": ">=7.2"
+	},
 	"require-dev": {
-		"phpunit/phpunit": "^4.8.35 | ^5.5 | ^6.5"
+		"phpunit/phpunit": "^9.6"
+	},
+	"scripts": {
+		"test": "phpunit tests/ -v"
 	},
 	"extra": {
 		"branch-alias": {
